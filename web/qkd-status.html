@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QKD Status</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .title {
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .chart-container {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">QKD Status</div>
+    <canvas id="qkdPieChart" class="chart-container"></canvas>
+    <script>
+        const pieData = {
+            labels: ['A', 'B', 'C', 'D'],
+            datasets: [{
+                data: [25, 25, 25, 25],
+                backgroundColor: ['#42a5f5', '#90caf9', '#ffeb3b', '#80deea']
+            }]
+        };
+
+        new Chart(document.getElementById('qkdPieChart'), {
+            type: 'pie',
+            data: pieData
+        });
+    </script>
+</body>
+</html>
