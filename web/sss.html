@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QKD Status</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 150px;
+            background-color: #f44336;
+            padding: 10px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar div {
+            background-color: #e60000;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .main {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 40px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .chart-container {
+            width: 250px;
+            height: 250px;
+        }
+
+        .title {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .logo {
+            background-color: pink;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">LOGO</div>
+        <a href="qkd-status.html" style="text-decoration:none;">
+            <div>QKD Status</div>
+        </a>
+        <div>Network Topology</div>
+        <div>Security & Alerts</div>
+    </div>
+    <div class="main">
+        <div>
+            <canvas id="qberChart" class="chart-container"></canvas>
+            <div class="title">Quantum Bit Error Rate (QBER) in %</div>
+        </div>
+        <div>
+            <canvas id="visibilityChart" class="chart-container"></canvas>
+            <div class="title">Visibility (signal-to-noise ratio) %</div>
+        </div>
+        <div>
+            <canvas id="keyRateChart" width="300" height="150"></canvas>
+            <div class="title">Secret Key Rate in kbps</div>
+        </div>
+        <div class="title">Secret Key Available</div>
+    </div>
+
+    <script>
+        const pieData = {
+            labels: ['A', 'B', 'C', 'D'],
+            datasets: [{
+                data: [25, 25, 25, 25],
+                backgroundColor: ['#42a5f5', '#90caf9', '#ffeb3b', '#80deea']
+            }]
+        };
+
+        new Chart(document.getElementById('qberChart'), {
+            type: 'pie',
+            data: pieData
+        });
+
+        new Chart(document.getElementById('visibilityChart'), {
+            type: 'pie',
+            data: pieData
+        });
+
+        new Chart(document.getElementById('keyRateChart'), {
+            type: 'line',
+            data: {
+                labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7"],
+                datasets: [{
+                    label: 'Key Rate',
+                    data: [12, 19, 14, 20, 18, 16, 13],
+                    borderColor: '#f44336',
+                    fill: false,
+                    tension: 0.2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
